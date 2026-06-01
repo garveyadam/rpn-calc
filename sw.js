@@ -1,4 +1,4 @@
-const CACHE = 'rpn-v1';
+const CACHE = 'rpn-v2';
 const LOCAL = [
   './',
   './index.html',

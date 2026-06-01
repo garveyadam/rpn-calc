@@ -23,6 +23,7 @@
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; height: 100%; }
+  html { background: #01080f; } /* covers safe areas if body gradient doesn't reach */
   body {
     background: radial-gradient(140% 120% at 50% 0%, #06243a 0%, #03121f 60%, #01080f 100%);
     overflow: hidden;
@@ -62,12 +63,12 @@
   }
 
   /* Mobile / standalone: fill the viewport, no device frame */
+  /* ControlBar already has 64px top padding to clear the status bar.
+     No extra safe-area padding needed — the app's own spacers handle both ends. */
   @media (max-width: 500px), (display-mode: standalone) {
     .rpn-stage {
       align-items: stretch;
       height: 100dvh;
-      padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
     .rpn-frame {
       width: 100% !important;
