@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>RPN Calc</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="RPN Calc" />
+<meta name="theme-color" content="#03121f" />
+<link rel="apple-touch-icon" href="swiftui/AppIcon/appicon-180.png" />
+
+<style>
+  @font-face {
+    font-family: 'DM Sans';
+    src: url('fonts/DMSans-VariableFont_opsz_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: radial-gradient(140% 120% at 50% 0%, #06243a 0%, #03121f 60%, #01080f 100%);
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  #root { height: 100%; }
+
+  .rpn-stage {
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .rpn-frame {
+    width: 402px; height: 874px; flex-shrink: 0;
+    transform-origin: center center;
+  }
+
+  /* stack lift on push/compute */
+  @keyframes rpnLift {
+    from { transform: translateY(9px); opacity: 0.45; }
+    to   { transform: translateY(0);   opacity: 1; }
+  }
+  .rpn-lift { animation: rpnLift .22s cubic-bezier(.22,1,.36,1); }
+
+  /* error shake */
+  @keyframes rpnShake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); }
+    40% { transform: translateX(7px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+  }
+  .rpn-shake { animation: rpnShake .35s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rpn-lift, .rpn-shake { animation: none; }
+  }
+
+  /* Mobile / standalone: fill the viewport, no device frame */
+  @media (max-width: 500px), (display-mode: standalone) {
+    .rpn-stage {
+      align-items: stretch;
+      height: 100dvh;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .rpn-frame {
+      width: 100% !important;
+      height: 100% !important;
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="rpn-pwa.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="rpn-core.jsx"></script>
+<script type="text/babel" src="rpn-ui.jsx"></script>
+<script type="text/babel" src="rpn-sheets.jsx"></script>
+<script type="text/babel" src="rpn-app.jsx"></script>
+
+<script>
+  // fit the fixed 402×874 frame to the viewport (no-op on mobile where CSS overrides)
+  function fitFrame() {
+    var f = document.getElementById('rpn-frame');
+    if (!f) return;
+    var s = Math.min(window.innerWidth / 402, window.innerHeight / 874);
+    f.style.transform = 'scale(' + s + ')';
+  }
+  window.addEventListener('resize', fitFrame);
+  var _fit = setInterval(function () { if (document.getElementById('rpn-frame')) { fitFrame(); clearInterval(_fit); } }, 60);
+
+  // register service worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+// themes.jsx — three brand↔native calculator themes
+// Exports to window: RPN_THEMES
+
+const SF = '-apple-system, "SF Pro Display", system-ui, sans-serif';
+const SANS = '"DM Sans", system-ui, sans-serif';
+
+const RPN_THEMES = {
+  // 1 ── Pure Apple: classic black calculator, circular keys
+  apple: {
+    id: 'apple',
+    name: 'Pure Apple',
+    nativeAccent: '#FF9F0A',
+    bg: '#000000',
+    bgImage: 'none',
+    displayColor: '#ffffff',
+    displayMuted: 'rgba(255,255,255,0.5)',
+    placeholderColor: 'rgba(255,255,255,0.18)',
+    labelColor: 'rgba(255,255,255,0.32)',
+    labelFont: SF,
+    numFont: SF,
+    showRowLabels: false,
+    numBg: '#333333', numFg: '#ffffff',
+    fnBg: '#a5a5a5', fnFg: '#000000',
+    opFg: '#ffffff',
+    keyBorder: 'none',
+    keyRadius: 999,
+    keyH: 78,
+    keyGap: 13,
+    padKeypad: '0 13px 0',
+    keyFont: SF,
+    keyFs: 33, keyFsSmall: 17, keyWeight: 400,
+    keyShadow: 'none',
+    sharp: false,
+  },
+
+  // 2 ── Brand-tinted: native ergonomics on Garvey-Adam navy, squircle keys
+  navy: {
+    id: 'navy',
+    name: 'Brand-tinted',
+    nativeAccent: '#0099FF',
+    bg: '#002847',
+    bgImage: 'radial-gradient(120% 80% at 50% 0%, #00496e 0%, #002847 55%, #001b30 100%)',
+    displayColor: '#ffffff',
+    displayMuted: 'rgba(220,236,255,0.55)',
+    placeholderColor: 'rgba(180,210,235,0.18)',
+    labelColor: 'rgba(150,196,232,0.6)',
+    labelFont: SANS,
+    numFont: SF,
+    showRowLabels: true,
+    numBg: 'rgba(255,255,255,0.10)', numFg: '#ffffff',
+    fnBg: 'rgba(0,153,255,0.16)', fnFg: '#bfe3ff',
+    opFg: '#ffffff',
+    keyBorder: '1px solid rgba(255,255,255,0.06)',
+    keyRadius: 22,
+    keyH: 76,
+    keyGap: 12,
+    padKeypad: '0 14px 0',
+    keyFont: SF,
+    keyFs: 31, keyFsSmall: 16, keyWeight: 400,
+    keyShadow: '0 1px 0 rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06)',
+    sharp: false,
+  },
+
+  // 3 ── Brand instrument: sharp 0-radius keys, navy display panel, the firm's DNA
+  instrument: {
+    id: 'instrument',
+    name: 'Brand instrument',
+    nativeAccent: '#0072CE',
+    bg: '#FAFAF8',
+    bgImage: 'none',
+    displayColor: '#ffffff',
+    displayMuted: 'rgba(220,236,255,0.7)',
+    placeholderColor: 'rgba(160,200,232,0.35)',
+    labelColor: 'rgba(150,196,232,0.7)',
+    labelFont: SANS,
+    numFont: SF,
+    panelBg: 'linear-gradient(155deg, #003D5C 0%, #002847 100%)',
+    panelBorder: 'rgba(255,255,255,0.10)',
+    showRowLabels: true,
+    numBg: '#ffffff', numFg: '#1A1A1A',
+    fnBg: '#FAFAF8', fnFg: '#003D5C',
+    opFg: '#ffffff',
+    keyBorder: '1px solid #E0E5EA',
+    keyRadius: 0,
+    keyH: 74,
+    keyGap: 0,
+    padKeypad: '12px 18px 0',
+    keyFont: SANS,
+    keyFs: 28, keyFsSmall: 15, keyWeight: 500,
+    keyShadow: 'none',
+    sharp: true,
+  },
+};
+
+window.RPN_THEMES = RPN_THEMES;

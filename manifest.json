@@ -1,0 +1,22 @@
+{
+  "name": "RPN Calc",
+  "short_name": "RPN Calc",
+  "description": "Reverse Polish Notation calculator",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#03121f",
+  "theme_color": "#03121f",
+  "icons": [
+    {
+      "src": "swiftui/AppIcon/appicon-180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "swiftui/AppIcon/appicon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}

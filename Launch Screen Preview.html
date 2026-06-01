@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RPN Calc — Launch Screen</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    gap: 56px; flex-wrap: wrap; padding: 56px 24px;
+    background: #0a1622;
+    font-family: -apple-system, "SF Pro Display", system-ui, sans-serif;
+  }
+  .phone {
+    width: 300px; height: 650px; border-radius: 52px; position: relative; overflow: hidden;
+    box-shadow: 0 40px 90px rgba(0,0,0,0.6), 0 0 0 11px #0d0d10, 0 0 0 12px #2a2a30;
+  }
+  /* exact app gradient */
+  .launch { position: absolute; inset: 0;
+    background:
+      radial-gradient(90% 60% at 50% 32%, rgba(0,153,255,0.10), rgba(0,153,255,0) 70%),
+      linear-gradient(180deg, #00496E 0%, #002847 55%, #001B30 100%);
+    display: flex; align-items: center; justify-content: center; }
+  .mark { display: flex; flex-direction: column; align-items: center; gap: 13px; }
+  .bar { border-radius: 999px; }
+  .z { width: 64px; height: 13px; background: rgba(255,255,255,0.16); }
+  .y { width: 104px; height: 13px; background: rgba(255,255,255,0.28); }
+  .x { width: 158px; height: 33px; border-radius: 10px;
+       background: linear-gradient(180deg, #3DB2FF, #0099FF);
+       box-shadow: 0 6px 26px rgba(0,153,255,0.55); margin-top: 5px; }
+  .indicator { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+    width: 120px; height: 5px; border-radius: 999px; background: rgba(255,255,255,0.55); }
+  .status { position: absolute; top: 18px; left: 0; right: 0; display: flex; justify-content: space-between;
+    padding: 0 30px; color: #fff; font-size: 14px; font-weight: 600; opacity: 0.9; }
+  .caption { color: rgba(190,227,255,0.55); font-size: 13px; max-width: 280px; line-height: 1.6; }
+  .col { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .col h2 { color: #eaf4ff; font-size: 16px; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="col">
+    <h2>Launch screen</h2>
+    <div class="phone">
+      <div class="launch">
+        <div class="status"><span>9:41</span><span>􀙇 􀛨 􀋦</span></div>
+        <div class="mark">
+          <div class="bar z"></div>
+          <div class="bar y"></div>
+          <div class="bar x"></div>
+        </div>
+        <div class="indicator"></div>
+      </div>
+    </div>
+    <p class="caption">Full-bleed gradient identical to the app's background, with the
+      stack mark centered — so cold-start dissolves seamlessly into the live calculator.</p>
+  </div>
+</body>
+</html>
